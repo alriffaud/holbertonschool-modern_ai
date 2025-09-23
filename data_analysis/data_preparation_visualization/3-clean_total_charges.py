@@ -2,7 +2,6 @@
 """
 Module for cleaning missing values in TotalCharges.
 """
-import pandas as pd
 
 
 def clean_total_charges(df, method='drop'):
