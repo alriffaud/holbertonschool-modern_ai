@@ -15,9 +15,10 @@ def plot_churn_distribution(df):
     """
     plt.figure(figsize=(12, 8))
 
-    colors = ['blue', 'orange']
-    counts = df['Churn'].value_counts()[['No', 'Yes']]
-    plt.bar(counts.index, counts.values, color=colors)
+    churn_counts = df['Churn'].value_counts()
+
+    plt.bar(churn_counts.index, churn_counts.values,
+            color=['skyblue', 'salmon'])
 
     plt.title("Churn Distribution")
     plt.xlabel("Churn")
