@@ -21,6 +21,6 @@ def plot_correlation_heatmap(df):
 
     # Generate a heatmap
     sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm", square=True,
-                vmin=-1, vmax=1, cbar_kws={"shrink": .8})
+                vmin=-1, vmax=1)
     plt.title("Correlation Matrix")
     plt.show()
