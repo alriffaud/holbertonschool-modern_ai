@@ -20,7 +20,8 @@ def plot_continuous_distributions(df, columns_to_plot=None):
     """
     # Selecting numeric columns
     if columns_to_plot is None:
-        columns_to_plot = df.select_dtypes(include=[np.number]).columns.tolist()
+        columns_to_plot = df.select_dtypes(
+            include=[np.number]).columns.tolist()
 
     n_cols = len(columns_to_plot)
     fig, axes = plt.subplots(n_cols, 2, figsize=(10, 3 * n_cols))
