@@ -12,6 +12,8 @@ def plot_correlation_heatmap(df):
     heatmap.
     Args:
         df: pandas DataFrame
+    Returns:
+        None
     """
     plt.figure(figsize=(6, 5))
 
@@ -20,7 +22,7 @@ def plot_correlation_heatmap(df):
     corr = df[numeric_cols].corr()
 
     # Generate a heatmap
-    sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm", square=True,
+    sns.heatmap(corr, annot=True, cmap="coolwarm", square=True,
                 vmin=-1, vmax=1)
     plt.title("Correlation Matrix")
     plt.show()
