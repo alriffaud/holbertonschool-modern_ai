@@ -16,14 +16,11 @@ def plot_categorical_vs_churn(df, col):
         None
     """
     # Convert Churn to numeric (1 for Yes, 0 for No) if necessary
-    churn_numeric = df["Churn"].apply(lambda x: 1 if x == "Yes" else 0)
-
-    # Compute churn rate per category
-    churn_rate = churn_numeric.groupby(df[col]).mean()
+    churn_rate = df.groupby(col)['Churn'].value_counts(normalize=True).unstack()
 
     # Plot
     plt.figure(figsize=(12, 8))
-    plt.bar(churn_rate.index, churn_rate)
+    plt.bar(churn_rate.index, churn_rate['Yes'])
 
     plt.ylabel("Churn Rate")
     plt.title(f"Churn Rate by {col}")
