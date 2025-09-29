@@ -23,7 +23,7 @@ def plot_categorical_vs_churn(df, col):
 
     # Plot
     plt.figure(figsize=(12, 8))
-    churn_rate.plot(kind="bar")
+    plt.bar(churn_rate.index, churn_rate)
 
     plt.ylabel("Churn Rate")
     plt.title(f"Churn Rate by {col}")
