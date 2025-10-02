@@ -3,7 +3,6 @@
 Chi-square tests for categorical features against Churn
 """
 import pandas as pd
-from scipy.stats import chi2_contingency
 
 
 def chi_square_tests(df):
@@ -17,12 +16,16 @@ def chi_square_tests(df):
         dict: Mapping {feature_name: p_value}
     """
     results = {}
-    categorical_cols = df.select_dtypes(
-        include=['object']).columns.drop('Churn')
+    categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
+    if 'Churn' in categorical_cols:
+        categorical_cols.remove('Churn')
+
+    stats = __import__('scipy.stats', fromlist=['stats'])
+    chi2_contingency = stats.chi2_contingency
 
     for col in categorical_cols:
         contingency = pd.crosstab(df[col], df['Churn'])
-        chi2, p, _, _ = chi2_contingency(contingency)
+        _, p, _, _ = chi2_contingency(contingency.values)
         results[col] = p
 
     return results
