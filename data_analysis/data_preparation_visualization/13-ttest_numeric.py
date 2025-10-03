@@ -2,7 +2,6 @@
 """
 Performs Welch's t-tests for numeric features vs Churn
 """
-import pandas as pd
 from scipy import stats
 
 
