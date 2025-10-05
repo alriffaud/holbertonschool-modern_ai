@@ -3,7 +3,7 @@
 Encode categorical and binary features for modeling
 """
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder, OrdinalEncoder
+from sklearn import preprocessing
 
 
 def encode_features(df):
@@ -19,18 +19,18 @@ def encode_features(df):
     df = df.copy()
 
     # Label encode Churn (No→0, Yes→1)
-    churn_le = LabelEncoder()
+    churn_le = preprocessing.LabelEncoder()
     df['Churn'] = churn_le.fit_transform(df['Churn'])
 
     # Binary columns (No→0, Yes→1)
     binary_cols = ['Partner', 'Dependents', 'PaperlessBilling',
                    'SeniorCitizen']
-    binary_oe = OrdinalEncoder(categories=[['No', 'Yes']] *
-                               len(binary_cols))
+    binary_oe = preprocessing.OrdinalEncoder(categories=[['No', 'Yes']] *
+                                             len(binary_cols))
     df[binary_cols] = binary_oe.fit_transform(df[binary_cols]).astype(int)
 
     # TenureGroup: alphabetical order
-    tenure_oe = OrdinalEncoder()
+    tenure_oe = preprocessing.OrdinalEncoder()
     df[['TenureGroup']] = tenure_oe.fit_transform(
         df[['TenureGroup']]).astype(int)
 
