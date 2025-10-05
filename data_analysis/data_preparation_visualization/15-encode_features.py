@@ -25,9 +25,13 @@ def encode_features(df):
     # Binary columns (No→0, Yes→1)
     binary_cols = ['Partner', 'Dependents', 'PaperlessBilling',
                    'SeniorCitizen']
-    binary_oe = preprocessing.OrdinalEncoder(categories=[['No', 'Yes']] *
-                                             len(binary_cols))
-    df[binary_cols] = binary_oe.fit_transform(df[binary_cols]).astype(int)
+    try:
+        binary_oe = preprocessing.OrdinalEncoder(categories=[['No', 'Yes']])
+        df[binary_cols] = binary_oe.fit_transform(df[binary_cols]).astype(int)
+    except ValueError:
+        binary_oe = preprocessing.OrdinalEncoder(categories=[['No', 'Yes']] *
+                                                 len(binary_cols))
+        df[binary_cols] = binary_oe.fit_transform(df[binary_cols]).astype(int)
 
     # TenureGroup: alphabetical order
     tenure_oe = preprocessing.OrdinalEncoder()
