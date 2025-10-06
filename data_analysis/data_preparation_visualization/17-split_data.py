@@ -2,7 +2,7 @@
 """
 Split dataset into training and testing sets using stratified sampling
 """
-from sklearn.model_selection import train_test_split
+from sklearn import model_selection
 
 
 def split_data(df, target='Churn', test_size=0.2, random_state=42):
@@ -21,7 +21,7 @@ def split_data(df, target='Churn', test_size=0.2, random_state=42):
     y = df[target]
 
     # Stratified split to preserve class balance
-    X_train, X_test, y_train, y_test = train_test_split(
+    X_train, X_test, y_train, y_test = model_selection.train_test_split(
         X, y,
         test_size=test_size,
         random_state=random_state,
