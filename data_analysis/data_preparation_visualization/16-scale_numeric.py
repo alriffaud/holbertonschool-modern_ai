@@ -2,7 +2,6 @@
 """
 Scale numeric features using StandardScaler
 """
-import pandas as pd
 from sklearn import preprocessing
 
 
