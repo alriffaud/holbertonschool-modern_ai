@@ -3,7 +3,7 @@
 Scrapes the first page of quotes from quotes.toscrape.com
 using requests and BeautifulSoup.
 """
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup  # external library: BeautifulSoup
 fetch_html = __import__('0-fetch_html').fetch_html
 
 
