@@ -3,6 +3,7 @@
 Extracts quotes from embedded JSON-LD blocks on a web page.
 """
 import json
+from bs4 import BeautifulSoup
 fetch_html = __import__('0-fetch_html').fetch_html
 
 
