@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """
 Scrapes all quotes from quotes.toscrape.com via its JSON API.
-Uses the helper function fetch_html() to retrieve JSON payloads.
+Uses only json and fetch_html as allowed.
 """
 import json
-from urllib import parse
 fetch_html = __import__('0-fetch_html').fetch_html
 
 
@@ -24,16 +23,19 @@ def scrape_via_api(base_url):
     page = 1
 
     while True:
-        # Build API endpoint URL dynamically
-        api_url = parse.urljoin(base_url, f"/api/quotes?page={page}")
+        # Build endpoint URL manually (without urllib)
+        if base_url.endswith('/'):
+            api_url = f"{base_url}api/quotes?page={page}"
+        else:
+            api_url = f"{base_url}/api/quotes?page={page}"
 
-        # Fetch JSON text from the API
+        # Get JSON text from API
         response_text = fetch_html(api_url)
 
-        # Convert JSON string into Python dictionary
+        # Convert JSON string to Python dictionary
         data = json.loads(response_text)
 
-        # Extract quotes from the page
+        # Extract citations from the current page
         for quote in data.get("quotes", []):
             all_quotes.append({
                 "text": quote.get("text", "").strip(),
@@ -41,7 +43,7 @@ def scrape_via_api(base_url):
                 "tags": quote.get("tags", [])
             })
 
-        # Stop if there are no more pages
+        # Check if there are more pages
         if not data.get("has_next"):
             break
 
