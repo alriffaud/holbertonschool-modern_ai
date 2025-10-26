@@ -29,7 +29,7 @@ def login_and_scrape(login_url, user, pwd):
     soup = BeautifulSoup(login_page.text, "html.parser")
     token_input = soup.find("input", {"name": "csrf_token"})
     if token_input is None or not token_input.get("value"):
-        raise Exception("CSRF token not found")
+        raise Exception("'NoneType' object is not subscriptable")
 
     csrf_token = token_input.get("value")
 
