@@ -41,15 +41,16 @@ def scrape_products(url):
                                "price").text
         description = p.find_element(webdriver.common.by.By.CLASS_NAME,
                                      "description").text
-        rating = p.find_element(webdriver.common.by.By.CSS_SELECTOR,
-                                ".ratings p[data-rating]").get_attribute(
-                                    "data-rating")
+        stars = p.find_elements(
+            webdriver.common.by.By.CSS_SELECTOR,
+            ".ratings .ws-icon.ws-icon-star"
+        )
 
         products_data.append({
             "title": title,
             "price": price,
             "description": description,
-            "rating": int(rating)
+            "rating": len(stars)
         })
 
     driver.quit()
