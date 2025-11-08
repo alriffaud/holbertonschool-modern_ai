@@ -13,5 +13,5 @@ def lasso_regression(random_state):
     """
     model = linear_model.Lasso(alpha=1.0,
                                random_state=random_state,
-                               max_iter=10000)
+                               max_iter=1000)
     return model
