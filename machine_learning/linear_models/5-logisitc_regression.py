@@ -12,8 +12,5 @@ def Logistic_Regression_Model(random_state):
     Returns:
         model: An untrained LogisticRegression instance.
     """
-    model = linear_model.LogisticRegression(
-        random_state=random_state,
-        max_iter=1000  # Ensures convergence for most datasets
-    )
+    model = linear_model.LogisticRegression(random_state=random_state)
     return model
